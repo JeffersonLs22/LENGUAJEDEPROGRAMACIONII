@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mantenimiento de Libro</title>
+    
+    <!-- Agrega enlaces a los archivos CSS de Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- Agregar SweetAlert (CDN) -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+  
+    
+</head>
+<body>
+    <div class="container">
+        <!-- Muestra los detalles del libro -->
+        <h1 class="my-4">Detalles del Libro</h1>
+        <div class="card">
+            <div class="card-body">
+				<p class="card-text">Codigo: <span th:text="${libro.codLibro}"></span></p>
+                <p class="card-text">Título: <span th:text="${libro.titLibro}"></span></p>
+                <p class="card-text">Autor: <span th:text="${libro.autor.nomAutor}"></span></p>
+                <p class="card-text">Fecha de Publicación: <span th:text="${#dates.format(libro.fchPublicacion, 'dd-MM-yyyy')}"></span></p>
+                <p class="card-text">Descripción: <span th:text="${libro.autor.descripcion}"></span></p>
+            </div>
+        </div>
+        
+ <form method="post" id="eliminarForm" th:action="@{'/eliminar/' + ${libro.codLibro}}" >
+   <button type="submit" class="btn btn-danger my-3" id="eliminarBtn">Eliminar Libro</button>
+
+</form>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<!-- Agregar este código en un bloque de script dentro de tu archivo HTML -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Selecciona el formulario y el botón
+  const eliminarForm = document.getElementById('eliminarForm');
+  const eliminarBtn = document.getElementById('eliminarBtn');
+
+  eliminarForm.addEventListener('submit', function(event) {
+    event.preventDefault(); // Evita que el formulario se envíe inmediatamente
+
+    Swal.fire({
+      title: 'Se elimió correctamente...',
+      text: 'Redirigiendo...\nPor favor, espera.',
+      showConfirmButton: false,
+      icon: 'success',
+  	  timer: 4000
+    }).then((result) => {
+          eliminarForm.submit();     
+    });
+  });
+});
+</script>
+
+
+        <!-- Botón para volver a la lista de libros -->
+        <a th:href="@{/listalibros}" class="btn btn-primary">Volver</a>
+        
+        
+      
+        
+    </div>
+    <!-- Agrega enlaces a los archivos JavaScript de Bootstrap y jQuery si los necesitas -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    
+    
+    
+   
+
+    
+</body>
+</html>
+ 
